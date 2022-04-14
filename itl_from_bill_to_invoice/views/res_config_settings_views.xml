@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="res_config_settings_view_form_from_bti" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.invoice</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="85"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="From Bill to Invoice" string="From Bill to Invoice" data-key="itl_from_bill_to_invoice">
+                        <h2>From Bill to Invoice</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Extra cost type</span>
+                                    <div class="text-muted">
+                                        The invoice lines of invoice created from bill will add the extra percentage or fixed price.
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="extra_cost_type"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': ['|',('extra_cost_type','=',False),('extra_cost_type','=','fixed')]}">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Percentage</span>
+                                    <div class="text-muted">
+                                        Percentage
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="percentage"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': ['|',('extra_cost_type','=',False),('extra_cost_type','=','percentage')]}">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Fixed price</span>
+                                    <div class="text-muted">
+                                        Fixed price.
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="fixed_price"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': [('extra_cost_type','=',False)], 'required': [('extra_cost_type','!=',False)]}">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Customer fo new invoice</span>
+                                    <div class="text-muted">
+                                        The customer to be used in the new invoice.
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="invoice_partner_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': [('extra_cost_type','=',False)], 'required': [('extra_cost_type','!=',False)]}">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Product for new invoice</span>
+                                    <div class="text-muted">
+                                        The product to be used in the new invoice.
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="invoice_product_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_from_bti_settings" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_id" ref="res_config_settings_view_form_from_bti"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+        
+    </data>
+</odoo>
