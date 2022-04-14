@@ -11,10 +11,10 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     def create_customer_invoice(self):
-        journal_id = self.with_context(default_type='out_invoice',default_journal_id=False)._get_default_journal()
+        journal_id = self.with_context(default_move_type='out_invoice',default_journal_id=False)._get_default_journal()
 
         vals = {
-            'type': 'out_invoice',
+            'move_type': 'out_invoice',
             'journal_id': journal_id.id,
             #'l10n_mx_edi_payment_method_id': self.partner_id.itl_payment_method_id.id if self.partner_id.itl_payment_method_id else False,
             #'l10n_mx_edi_usage': self.partner_id.itl_usage,

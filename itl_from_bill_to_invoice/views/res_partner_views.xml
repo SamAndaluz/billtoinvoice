@@ -8,11 +8,14 @@
             <notebook position="inside">
               <page string="From Bill to Inovice">
                 <group>
-                    <field name="extra_cost_type" help="The invoice lines of invoice created from bill will add the extra percentage or fixed price."/>
-                    <field name="percentage" attrs="{'invisible': ['|',('extra_cost_type','=',False),('extra_cost_type','=','fixed')]}"/>
-                    <field name="fixed_price" attrs="{'invisible': ['|',('extra_cost_type','=',False),('extra_cost_type','=','percentage')]}"/>
-                    <field name="invoice_partner_id" attrs="{'invisible': [('extra_cost_type','=',False)], 'required': [('extra_cost_type','!=',False)]}"/>
-                    <field name="invoice_product_id" attrs="{'invisible': [('extra_cost_type','=',False)], 'required': [('extra_cost_type','!=',False)]}"/>
+                    <group>
+                        <field name="extra_cost_type" help="The invoice lines of invoice created from bill will add the extra percentage or fixed price."/>
+                        <field name="percentage" attrs="{'invisible': ['|',('extra_cost_type','=',False),('extra_cost_type','=','fixed')]}"/>
+                        <field name="fixed_price" attrs="{'invisible': ['|',('extra_cost_type','=',False),('extra_cost_type','=','percentage')]}"/>
+                        <field name="invoice_partner_id" attrs="{'invisible': [('extra_cost_type','=',False)], 'required': [('extra_cost_type','!=',False)]}"/>
+                        <field name="invoice_product_id" attrs="{'invisible': [('extra_cost_type','=',False)], 'required': [('extra_cost_type','!=',False)]}"/>
+                    </group>
+                    <group></group>
                 </group>
               </page>
             </notebook>
