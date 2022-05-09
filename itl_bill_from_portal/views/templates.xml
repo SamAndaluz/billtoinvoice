@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="portal_my_invoices_inherit" inherit_id="account.portal_my_invoices">
+    <xpath expr="//t[@t-if='not invoices']" position="after">
+      <a data-toggle="collapse" href="#collapseUploadFile" role="button" aria-expanded="false" aria-controls="collapseUploadFile">
+        Create Bill from File
+      </a>
+      <div class="media collapse" id="collapseUploadFile">
+          <div class="media-body">
+              <form class="o_portal_chatter_composer_form" t-attf-action="/vendor/post_files" method="POST" enctype="multipart/form-data">
+                  <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                  <div class="mb32">
+                      <textarea rows="4" name="message" class="form-control" placeholder="Write a message..."></textarea>
+                      <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Period</label>
+                        <div class="form-group col-md-2">
+                          <label for="from_date">From</label>
+                          <input type="date" class="form-control o_website_form_input o_website_form_date" name="from_date" id="from_date" placeholder="From Date"/>
+                        </div>
+                        <div class="form-group col-md-2">
+                          <label for="to_date">To</label>
+                          <input type="date" class="form-control o_website_form_input o_website_form_date" name="to_date" id="to_date" placeholder="To Date"/>
+                        </div>
+                      </div>
+                      <div class="mt8">
+                          <button t-attf-class="o_portal_chatter_composer_btn btn btn-primary" type="submit">Send</button>
+                          
+                          <label t-attf-class="o_portal_chatter_composer_btn btn btn-secondary" style="margin-bottom: 0">
+                            <i class="fa fa-money"></i> Bill<input type="file" style="display: none;" id="bill_file" name="bill_file" accept="application/pdf"/>
+                          </label>
+                          <span id="bill_name"></span>
+
+                          <label t-attf-class="o_portal_chatter_composer_btn btn btn-secondary" style="margin-bottom: 0">
+                            <i class="fa fa-table"></i> Timesheet<input type="file" style="display: none;" id="spreedsheet_file" name="spreedsheet_file"/>
+                          </label>
+                          <span id="spreedsheet_name"></span>
+                          
+                          <script>
+                            document.getElementById("bill_file").onchange = function () {
+                                document.getElementById("bill_name").innerHTML = this.files[0].name;
+                            };
+                            document.getElementById("spreedsheet_file").onchange = function () {
+                                document.getElementById("spreedsheet_name").innerHTML = this.files[0].name;
+                            };
+                          </script>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </xpath>
+
+  </template>
+
+  
+</odoo>
